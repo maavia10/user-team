@@ -23,6 +23,25 @@ class User
 
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $firtsName;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Team",mappedBy="users")
+     */
+    private $team;
+    /**
      * Get id
      *
      * @return int
@@ -30,6 +49,83 @@ class User
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirtsName()
+    {
+        return $this->firtsName;
+    }
+
+    /**
+     * @param mixed $firtsName
+     */
+    public function setFirtsName($firtsName)
+    {
+        $this->firtsName = $firtsName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * @param mixed $team
+     */
+    public function setTeam($team)
+    {
+        $this->team = $team;
+    }
+
+
+    public function getTeams()
+    {
+
+        $teams = $this->team;
+        $teamName = '';
+        foreach ($teams as $team){
+            $teamName .=$team->getName().',';
+        }
+
+        return $teamName;
     }
 }
 
